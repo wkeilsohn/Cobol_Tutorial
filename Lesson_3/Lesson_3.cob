@@ -60,5 +60,18 @@
        END-IF.
 
        DISPLAY "Vote: " CanVoteFlag.
+
+       DISPLAY "Enter Single Number or 'X' to Exit: " WITH NO ADVANCING.
+       ACCEPT TestNumber.
+       PERFORM UNTIL NOT ANumber
+           EVALUATE TRUE
+               WHEN IsPrime DISPLAY "PRIME"
+               WHEN IsOdd DISPLAY "ODD"
+               WHEN IsEven DISPLAY "EVEN"
+               WHEN LessThanFive DISPLAY "LESS THAN 5"
+               WHEN OTHER DISPLAY "DEFAULT ACTION"
+           END-EVALUATE
+           ACCEPT TestNumber
+       END-PERFORM.
        
        STOP RUN.
