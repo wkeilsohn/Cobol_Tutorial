@@ -1,0 +1,39 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. LESSON18.
+       AUTHOR. WILLIAM-KEILSOHN.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT WORKFILE ASSIGN TO "work.tmp".
+           SELECT FILE1 ASSIGN TO "student.dat"
+               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT FILE2 ASSIGN TO "student3.dat"
+               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT NEWFILE ASSIGN TO "student4.dat"
+               ORGANIZATION IS LINE SEQUENTIAL.
+       DATA DIVISION.
+       FILE SECTION.
+       FD FILE1.
+       01 STUDDAT.
+           02 IDNUM PIC 9.
+           02 STUDNAME PIC X(10).
+       FD FILE2.
+       01 STUDDAT2.
+           02 IDNUM2 PIC 9.
+           02 STUDNAME2 PIC X(10).
+       SD WORKFILE.
+       01 WSTUDDAT.
+           02 WIDNUM PIC 9.
+           02 WSTUDNAME PIC X(10).
+       FD NEWFILE.
+       01 NSTUDDAT.
+           02 NIDNUM PIC 9.
+           02 NSTUDNAME PIC X(10).
+       WORKING-STORAGE SECTION.
+
+       PROCEDURE DIVISION.
+       MERGE WORKFILE ON ASCENDING KEY NIDNUM
+           USING FILE1, FILE2
+           GIVING NEWFILE.
+
+       STOP RUN.
